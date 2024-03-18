@@ -3,6 +3,7 @@ import {
   MousePointer2, 
   Pencil, 
   Redo2, 
+  Slash, 
   Square, 
   StickyNote, 
   Type,
@@ -71,6 +72,19 @@ export const Toolbar = ({
             canvasState.layerType === LayerType.Note
           }
         />
+        <ToolButton
+          label="Line"
+          icon={Slash}
+          onClick={() => setCanvasState({
+            mode: CanvasMode.Inserting,
+            layerType: LayerType.Line,
+          })}
+          isActive={
+            canvasState.mode === CanvasMode.Inserting &&
+            canvasState.layerType === LayerType.Line
+          }
+        />
+
         <ToolButton
           label="Rectangle"
           icon={Square}
