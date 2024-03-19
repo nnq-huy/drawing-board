@@ -85,7 +85,7 @@ export const Canvas = ({
 
     const liveLayerIds = storage.get("layerIds");
     const layerId = nanoid();
-    const layer = new LiveObject({
+    let layer = new LiveObject({
       type: layerType,
       x: position.x,
       y: position.y,
@@ -93,6 +93,16 @@ export const Canvas = ({
       width: 100,
       fill: lastUsedColor,
     });
+    if (layerType === LayerType.Line) {
+      layer =  new LiveObject({
+      type: layerType,
+      x: position.x,
+      y: position.y,
+      height: position.y+100,
+      width: position.x+100,
+      fill: lastUsedColor,
+    });
+   }
 
     liveLayerIds.push(layerId);
     liveLayers.set(layerId, layer);
@@ -120,10 +130,19 @@ export const Canvas = ({
       const layer = liveLayers.get(id);
 
       if (layer) {
-        layer.update({
-          x: layer.get("x") + offset.x,
-          y: layer.get("y") + offset.y,
+        if (layer.get("type")===LayerType.Line){
+          layer.update({
+            x: layer.get("x") + offset.x,
+            y: layer.get("y") + offset.y,
+            width:layer.get("width") + offset.x,
+            height:layer.get("height") + offset.y,
         });
+        } else {
+          layer.update({
+            x: layer.get("x") + offset.x,
+            y: layer.get("y") + offset.y,
+        });
+        }
       }
     }
 

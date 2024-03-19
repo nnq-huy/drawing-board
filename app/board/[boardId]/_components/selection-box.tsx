@@ -226,7 +226,7 @@ export const SelectionBox = memo(({
       }}
     />
     <rect
-      className="fill-white stroke-1 stroke-blue-500"
+      className="fill-white stroke-1 stroke-red-500"
       x={0}
       y={0}
       style={{
@@ -235,8 +235,8 @@ export const SelectionBox = memo(({
       height: `${HANDLE_WIDTH}px`,
       transform: `
         translate(
-          ${bounds.x - HANDLE_WIDTH / 2 + bounds.width}px, 
-          ${bounds.y - HANDLE_WIDTH / 2 + bounds.height}px
+          ${bounds.width - HANDLE_WIDTH / 2 }px, 
+          ${bounds.height - HANDLE_WIDTH / 2}px
         )`
       }}
       onPointerDown={(e) => {

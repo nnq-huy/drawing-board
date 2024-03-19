@@ -43,7 +43,7 @@ const ColorButton = ({
       onClick={() => onClick(color)}
     >
       <div 
-        className="h-6 w-6 rounded-md border border-neutral-300"
+        className="h-6 w-6 rounded-xl border border-neutral-300"
         style={{ background: colorToCss(color) }}
       />
     </button>

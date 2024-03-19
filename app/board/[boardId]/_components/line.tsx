@@ -15,15 +15,13 @@ export const Line = ({
 }: LineProps) => {
   const { x, y, width, height, fill } = layer;
 
+
   return (
     <line
       className="drop-shadow-md"
       onPointerDown={(e) => onPointerDown(e, id)}
-      style={{
-        transform: `translate(${x}px, ${y}px)`,
-      }}
-      x1={0}
-      y1={0}
+      x1={x}
+      y1={y}
       x2={width}
       y2={height}
       strokeWidth={5}

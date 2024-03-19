@@ -42,23 +42,29 @@ export function colorToCss(color: Color) {
   return `#${color.r.toString(16).padStart(2, "0")}${color.g.toString(16).padStart(2, "0")}${color.b.toString(16).padStart(2, "0")}`;
 }
 
-export function resizeLine(bounds: XYWH,point:Point,  corner: Side, 
+export function resizeLine(bounds: XYWH,point:Point,  corner: Side,
 ):XYWH{
-   const result = {
-    x: bounds.x,
-    y: bounds.y,
-    width: bounds.width,
-    height: bounds.height,
+  const result:XYWH =  {
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
   };
-
-  if ((corner & Side.Left) === Side.Left){
-    result.x = point.x;
-    result.y = point.y;
+  if ((corner & Side.Left) === Side.Left) {
+  result.x = point.x;
+  result.y = point.y;
+  result.width = bounds.width;
+  result.height = bounds.height;
   }
    if ((corner & Side.Right) === Side.Right) {
-    result.width = Math.abs(point.x - bounds.x);
-    result.height = Math.abs(point.y - bounds.y);
+  result.x = bounds.x;
+  result.y = bounds.y;
+  result.width =  point.x;
+  result.height = point.y;
   }
+
+
+//todo: handle start - end of line logic 
   return result;
 
 }
