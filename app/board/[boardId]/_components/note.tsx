@@ -76,7 +76,7 @@ export const Note = ({
           fill: fill ? getContrastingTextColor(fill) : "#000",
         }}
       >
-      {value!.replace(/&nbsp;/g, '')}
+      {value ? value.replace(/&nbsp;/g, ''): ''}
       </text>
     </g>
     <foreignObject

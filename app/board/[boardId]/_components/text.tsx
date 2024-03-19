@@ -61,7 +61,7 @@ export const Text = ({
         fill: fill ? colorToCss(fill) : "#000",
       }}
     >
-      {value!.replace(/&nbsp;/g, '')}
+      {value ? value.replace(/&nbsp;/g, ''): ''}
     </text>
 
     <foreignObject

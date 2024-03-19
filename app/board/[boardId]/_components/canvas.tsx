@@ -313,8 +313,8 @@ export const Canvas = ({
 
   const onWheel = useCallback((e: React.WheelEvent) => {
     setCamera((camera) => ({
-      x: camera.x - e.deltaX,
-      y: camera.y - e.deltaY,
+      x: Math.max(0, Math.min((camera.x - e.deltaX), 2000 - window.innerWidth)),
+      y: Math.max(0, Math.min((camera.y - e.deltaY), 1200 - window.innerHeight)),
     }));
   }, []);
 
@@ -515,7 +515,7 @@ export const Canvas = ({
         xmlns="http://www.w3.org/2000/svg"
         className="h-[100vh] w-[100vw]"
         width={2000}
-        height={2000}
+        height={1200}
         onWheel={onWheel}
         onPointerMove={onPointerMove}
         onPointerLeave={onPointerLeave}
@@ -527,6 +527,21 @@ export const Canvas = ({
             transform: `translate(${camera.x}px, ${camera.y}px)`
           }}
         >
+          <rect
+          x={0}
+          y={0}
+          width={2000}
+          height={1200}
+          style={{
+            fill:"transparent"
+          }}
+          stroke={"black"}
+          strokeWidth={4}
+          strokeOpacity={0.4}
+          strokeDasharray={10}
+          >
+
+          </rect>
           {layerIds.map((layerId) => (
             <LayerPreview
               key={layerId}

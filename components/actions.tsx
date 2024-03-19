@@ -62,10 +62,10 @@ export const Actions = ({
 
       const canvas = document.createElement('canvas');
       canvas.width = 2000;
-      canvas.height = 2000;
+      canvas.height = 1200;
 
       const context = canvas.getContext('2d');
-      context!.drawImage(img, 0, 0, 2000, 2000);
+      context!.drawImage(img, 0, 0, 2000, 1200);
 
       URL.revokeObjectURL(url);
 
