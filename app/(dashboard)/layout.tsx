@@ -10,7 +10,7 @@ const DashboardLayout = ({
   children,
   }:DashboardLayoutProps)=> {
     return (
-      <main className="h-full">
+      <main className="min-h-[95vh]">
         <Sidebar />
         <div className="pl-[60px] h-full">
           <div className="flex gap-x-3 h-full">

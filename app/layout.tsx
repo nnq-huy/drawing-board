@@ -7,6 +7,7 @@ import { ConvexClientProvider } from "@/providers/convex-client-provider";
 import { ModalProvider } from "@/providers/modal-provider";
 import { Suspense } from "react";
 import { Loading } from "@/components/auth/loading";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
             {children}
           </ConvexClientProvider>
         </Suspense>
+        <Footer />
         </body>
     </html>
   );

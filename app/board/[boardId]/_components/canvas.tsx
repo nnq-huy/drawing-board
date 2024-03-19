@@ -311,12 +311,12 @@ export const Canvas = ({
     });
   }, [history]);
 
-  const onWheel = useCallback((e: React.WheelEvent) => {
+/*   const onWheel = useCallback((e: React.WheelEvent) => {
     setCamera((camera) => ({
-      x: Math.max(0, Math.min((camera.x - e.deltaX), 2000 - window.innerWidth)),
-      y: Math.max(0, Math.min((camera.y - e.deltaY), 1200 - window.innerHeight)),
+      x: Math.max(0, Math.min((camera.x - e.deltaX), 2050 - window.innerWidth)),
+      y: Math.max(0, Math.min((camera.y - e.deltaY), 1100 - window.innerHeight)),
     }));
-  }, []);
+  }, []); */
 
   const onPointerMove = useMutation((
     { setMyPresence }, 
@@ -503,7 +503,7 @@ export const Canvas = ({
         camera={camera}
         setLastUsedColor={setLastUsedColor}
       />
-      <div className="absolute bottom-2 left-2 flex flex-col gap-y-4">
+      <div className="absolute bottom-16 left-2 flex flex-col gap-y-4">
         <div className="bg-white rounded-md p-1.5 flex gap-y-1 flex-col items-center shadow-md text-sm font-semibold">
           x:{pos ? pos.x : "0"} , y:{pos ? pos.y : "0"}
         </div>
@@ -512,11 +512,10 @@ export const Canvas = ({
       </div>
       <svg
         id="main"
+        width={2064}
+        height={1064}
         xmlns="http://www.w3.org/2000/svg"
-        className="h-[100vh] w-[100vw]"
-        width={2000}
-        height={1200}
-        onWheel={onWheel}
+        className="h-full w-full"
         onPointerMove={onPointerMove}
         onPointerLeave={onPointerLeave}
         onPointerDown={onPointerDown}
@@ -528,15 +527,15 @@ export const Canvas = ({
           }}
         >
           <rect
-          x={0}
-          y={0}
-          width={2000}
-          height={1200}
+          x={63}
+          y={63}
+          width={2002}
+          height={1002}
           style={{
             fill:"transparent"
           }}
           stroke={"black"}
-          strokeWidth={4}
+          strokeWidth={3}
           strokeOpacity={0.4}
           strokeDasharray={10}
           >
