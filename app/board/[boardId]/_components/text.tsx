@@ -1,14 +1,8 @@
-import { Kalam } from "next/font/google";
 import ContentEditable, { ContentEditableEvent } from "react-contenteditable";
 
 import { TextLayer } from "@/types/canvas";
 import { cn, colorToCss } from "@/lib/utils";
 import { useMutation } from "@/liveblocks.config";
-
-const font = Kalam({
-  subsets: ["latin"],
-  weight: ["400"],
-});
 
 const calculateFontSize = (width: number, height: number) => {
   const maxFontSize = 96;
@@ -52,12 +46,31 @@ export const Text = ({
   };
 
   return (
+    <>
+    <text
+      x={x+width/2}
+      y={y+height/2}
+      textAnchor={"middle"}
+      alignmentBaseline={"middle"}
+      className={cn(
+        "h-full w-full flex items-center justify-center text-center drop-shadow-md outline-none",
+      )}
+      style={{
+        fontFamily:"monospace",
+        fontSize: calculateFontSize(width, height),
+        fill: fill ? colorToCss(fill) : "#000",
+      }}
+    >
+      {value!.replace(/&nbsp;/g, '')}
+    </text>
+
     <foreignObject
+      xmlns={"http://www.w3.org/1999/xhtml"}
       x={x}
       y={y}
+      onPointerDown={(e) => onPointerDown(e, id)}
       width={width}
       height={height}
-      onPointerDown={(e) => onPointerDown(e, id)}
       style={{
         outline: selectionColor ? `1px solid ${selectionColor}` : "none"
       }}
@@ -65,15 +78,13 @@ export const Text = ({
       <ContentEditable
         html={value || ""}
         onChange={handleContentChange}
-        className={cn(
-          "h-full w-full flex items-center justify-center text-center drop-shadow-md outline-none",
-          font.className
-        )}
+        className={"h-full w-full flex items-center justify-center text-center drop-shadow-md outline-none"}
         style={{
           fontSize: calculateFontSize(width, height),
-          color: fill ? colorToCss(fill) : "#000",
+          color: "transparent",
         }}
       />
     </foreignObject>
+    </>
   );
 };

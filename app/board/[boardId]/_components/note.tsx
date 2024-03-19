@@ -52,7 +52,35 @@ export const Note = ({
   };
 
   return (
+    <>
+    <g>
+      <rect
+        x={x}
+        y={y}
+        width={width}
+        height={height}
+        style={{
+        fill: fill ? colorToCss(fill) : "#000",
+        }}
+      >
+      </rect>
+      <text
+       x={x+width/2}
+      y={y+height/2}
+      textAnchor={"middle"}
+      alignmentBaseline={"middle"}
+        className={"h-full w-full flex items-center justify-center text-center drop-shadow-md outline-none"}
+        style={{
+          fontFamily:"monospace",
+          fontSize: calculateFontSize(width, height),
+          fill: fill ? getContrastingTextColor(fill) : "#000",
+        }}
+      >
+      {value!.replace(/&nbsp;/g, '')}
+      </text>
+    </g>
     <foreignObject
+      xmlns={"http://www.w3.org/1999/xhtml"}
       x={x}
       y={y}
       width={width}
@@ -60,7 +88,6 @@ export const Note = ({
       onPointerDown={(e) => onPointerDown(e, id)}
       style={{
         outline: selectionColor ? `1px solid ${selectionColor}` : "none",
-        backgroundColor: fill ? colorToCss(fill) : "#000",
       }}
       className="shadow-md drop-shadow-xl"
     >
@@ -69,13 +96,14 @@ export const Note = ({
         onChange={handleContentChange}
         className={cn(
           "h-full w-full flex items-center justify-center text-center outline-none",
-          font.className
         )}
         style={{
           fontSize: calculateFontSize(width, height),
-          color: fill ? getContrastingTextColor(fill) : "#000",
+          color: "transparent",
         }}
       />
     </foreignObject>
+    </>
+    
   );
 };

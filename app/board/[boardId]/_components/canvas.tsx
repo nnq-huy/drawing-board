@@ -1,7 +1,7 @@
 "use client";
 
 import { nanoid } from "nanoid";
-import { useCallback, useMemo, useState, useEffect } from "react";
+import { useCallback, useMemo, useState, useEffect, ReactElement } from "react";
 import { LiveObject } from "@liveblocks/client";
 
 import { 
@@ -43,6 +43,7 @@ import { LayerPreview } from "./layer-preview";
 import { SelectionBox } from "./selection-box";
 import { SelectionTools } from "./selection-tools";
 import { CursorsPresence } from "./cursors-presence";
+import { Button } from "@/components/ui/button";
 
 const MAX_LAYERS = 100;
 
@@ -98,7 +99,7 @@ export const Canvas = ({
       type: layerType,
       x: position.x,
       y: position.y,
-      height: position.y+100,
+      height: position.y,
       width: position.x+100,
       fill: lastUsedColor,
     });
@@ -481,9 +482,12 @@ export const Canvas = ({
   const me = useSelf();
   const pos = me.presence.cursor;
   
+
+  
+
   return (
       <main
-      className="h-full w-full relative touch-none pattern-dots pattern-neutral-300 pattern-bg-white pattern-size-4 pattern-opacity-30 opacity-100"
+      className="h-full w-full relative pattern-dots pattern-neutral-300 pattern-bg-white pattern-size-4 pattern-opacity-30 opacity-100"
     >
       <Info boardId={boardId} />
       <Participants />
@@ -504,9 +508,14 @@ export const Canvas = ({
           x:{pos ? pos.x : "0"} , y:{pos ? pos.y : "0"}
         </div>
       </div>
+      <div>
+      </div>
       <svg
+        id="main"
         xmlns="http://www.w3.org/2000/svg"
         className="h-[100vh] w-[100vw]"
+        width={2000}
+        height={2000}
         onWheel={onWheel}
         onPointerMove={onPointerMove}
         onPointerLeave={onPointerLeave}

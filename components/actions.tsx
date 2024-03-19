@@ -1,7 +1,7 @@
 "use client";
 
 import { toast } from "sonner";
-import { Link2, Pencil, Trash2 } from "lucide-react";
+import { Link2, Pencil, Trash2, ImageDown } from "lucide-react";
 import { DropdownMenuContentProps } from "@radix-ui/react-dropdown-menu";
 
 import { ConfirmModal } from "@/components/confirm-modal";
@@ -49,6 +49,37 @@ export const Actions = ({
       .catch(() => toast.error("Failed to delete board"));
   };
 
+  const saveSVG = ()=> {
+    const svg = document.querySelector('svg#main');
+    const data = (new XMLSerializer()).serializeToString(svg!);
+    const svgBlob = new Blob([data], {
+      type: 'image/svg+xml;charset=utf-8'
+    });
+    const url = URL.createObjectURL(svgBlob);
+    const img = new Image();
+    img.addEventListener('load', () => {
+    // draw the image on an ad-hoc canvas
+
+      const canvas = document.createElement('canvas');
+      canvas.width = 2000;
+      canvas.height = 2000;
+
+      const context = canvas.getContext('2d');
+      context!.drawImage(img, 0, 0, 2000, 2000);
+
+      URL.revokeObjectURL(url);
+
+      // trigger a synthetic download operation with a temporary link
+      const a = document.createElement('a');
+      a.download = 'image.png';
+      document.body.appendChild(a);
+      a.href = canvas.toDataURL();
+      a.click();
+      a.remove();
+    });
+    img.src = url;
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -73,6 +104,13 @@ export const Actions = ({
         >
           <Pencil className="h-4 w-4 mr-2" />
           Rename
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => saveSVG()}
+          className="p-3 cursor-pointer"
+        >
+          <ImageDown className="h-4 w-4 mr-2" />
+          Save as Image
         </DropdownMenuItem>
         <ConfirmModal
           header="Delete board?"
