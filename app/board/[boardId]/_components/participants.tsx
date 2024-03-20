@@ -13,7 +13,7 @@ export const Participants = () => {
   const hasMoreUsers = users.length > MAX_SHOWN_USERS;
 
   return (
-    <div className="absolute h-12 bottom-16 right-2 bg-white rounded-md p-3 flex items-center shadow-md">
+    <div className="absolute h-12 top-4 right-4 bg-white rounded-md p-3 flex items-center shadow-md z-10">
       <div className="flex gap-x-2">
         {users.slice(0, MAX_SHOWN_USERS)
           .map(({ connectionId, info }) => {

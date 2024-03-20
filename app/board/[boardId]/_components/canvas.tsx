@@ -44,6 +44,7 @@ import { SelectionBox } from "./selection-box";
 import { SelectionTools } from "./selection-tools";
 import { CursorsPresence } from "./cursors-presence";
 import { Button } from "@/components/ui/button";
+import { Editor } from "./code-editor/editor";
 
 const MAX_LAYERS = 100;
 

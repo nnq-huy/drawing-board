@@ -5,7 +5,7 @@ import {
   LiveObject,
 } from "@liveblocks/client";
 import { createRoomContext } from "@liveblocks/react";
-
+import LiveblocksProvider from "@liveblocks/yjs";
 import { Layer, Color } from "@/types/canvas";
   
 const client = createClient({
@@ -94,7 +94,12 @@ export type ThreadMetadata = {
   // quote: string;
   // time: number;
 };
-
+export type TypedLiveblocksProvider = LiveblocksProvider<
+  Presence,
+  Storage,
+  UserMeta,
+  RoomEvent
+>;
 export const {
   suspense: {
     RoomProvider,
