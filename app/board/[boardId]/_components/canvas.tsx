@@ -512,7 +512,7 @@ export const Canvas = ({
       </div>
       <svg
         id="main"
-        width={2064}
+        width={1064}
         height={1064}
         xmlns="http://www.w3.org/2000/svg"
         className="h-full w-full"
@@ -529,7 +529,7 @@ export const Canvas = ({
           <rect
           x={63}
           y={63}
-          width={2002}
+          width={1002}
           height={1002}
           style={{
             fill:"transparent"

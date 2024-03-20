@@ -24,7 +24,7 @@ export const Line = ({
       y1={y}
       x2={width}
       y2={height}
-      strokeWidth={5}
+      strokeWidth={3}
       stroke={stroke?? "red"}
     />
   );

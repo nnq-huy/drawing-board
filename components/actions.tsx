@@ -61,11 +61,11 @@ export const Actions = ({
     // draw the image on an ad-hoc canvas
 
       const canvas = document.createElement('canvas');
-      canvas.width = 2000;
+      canvas.width = 1000;
       canvas.height = 1000;
 
       const context = canvas.getContext('2d');
-      context!.drawImage(img, 64, 64,2000,1000,0,0,2000,1000);
+      context!.drawImage(img, 64, 64,1000,1000,0,0,1000,1000);
 
       URL.revokeObjectURL(url);
 
