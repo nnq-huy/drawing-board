@@ -16,6 +16,7 @@
     "@liveblocks/node": "^1.10.4",
     "@liveblocks/react": "^1.10.4",
     "@liveblocks/yjs": "^1.10.0",
+    "@lorefnon/y-codemirror.next": "^0.3.3-alpha.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
     "@radix-ui/react-avatar": "^1.0.4",
@@ -43,7 +44,6 @@
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "usehooks-ts": "^3.0.1",
-    "y-codemirror.next": "^0.3.2",
     "yjs": "^13.6.4",
     "zustand": "^4.5.2"
   },

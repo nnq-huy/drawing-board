@@ -1,7 +1,7 @@
 "use client";
 
 import * as Y from "yjs";
-import { yCollab } from "y-codemirror.next";
+import { yCollab } from "@lorefnon/y-codemirror.next";
 import { EditorView, basicSetup } from "codemirror";
 import { EditorState } from "@codemirror/state";
 import { javascript } from "@codemirror/lang-javascript";
