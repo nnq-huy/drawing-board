@@ -22,7 +22,7 @@ const Footer: React.FC<FooterProps> = ({
           "
       >
         <Link title="Github" href={'https://github.com/nnq-huy'}>
-          <p className="text-neutral-600">© 2024 Huy Nguyen </p>
+          <p className="text-neutral-600 font-semibold font-mono">DrawCode © 2024 Huy Nguyen </p>
         </Link>
       </div>
     </footer>

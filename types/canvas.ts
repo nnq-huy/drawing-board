@@ -9,6 +9,10 @@ export type Camera = {
   y: number;
 };
 
+export enum Language {
+  javascript,
+  golang
+}
 export enum LayerType {
   Line,
   Rectangle,

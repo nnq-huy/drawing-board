@@ -12,8 +12,8 @@ import Footer from "@/components/footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "DrawBoard",
-  description: "Collaborative drawing booard",
+  title: "DrawCode",
+  description: "Collaborative drawing and coding booard",
 };
 
 export default function RootLayout({

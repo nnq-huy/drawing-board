@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Poppins } from "next/font/google";
 import { LayoutDashboard, Star } from "lucide-react";
 import { OrganizationSwitcher } from "@clerk/nextjs";
 import { useSearchParams } from "next/navigation";
@@ -10,10 +9,6 @@ import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
-const font = Poppins({
-  subsets: ["latin"],
-  weight: ["600"],
-});
 
 export const OrgSidebar = () => {
   const searchParams = useSearchParams();
@@ -30,10 +25,9 @@ export const OrgSidebar = () => {
             width={60}
           />
           <span className={cn(
-            "font-semibold text-xl",
-            font.className,
+            "text-xl font-mono font-semibold",
           )}>
-            DrawBoard
+            DrawCode
           </span>
         </div>
       </Link>

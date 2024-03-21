@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu } from "lucide-react";
 import { useQuery } from "convex/react";
-import { Poppins } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 import { Hint } from "@/components/hint";
@@ -17,11 +16,6 @@ import { useRenameModal } from "@/store/use-rename-modal";
 interface InfoProps {
   boardId: string;
 };
-
-const font = Poppins({
-  subsets: ["latin"],
-  weight: ["600"],
-});
 
 const TabSeparator = () => {
   return (
@@ -49,15 +43,14 @@ export const Info = ({
           <Link href="/">
             <Image
               src="/logo.svg"
-              alt="DrawBoard logo"
+              alt="DrawCode logo"
               height={40}
               width={40}
             />
             <span className={cn(
-              "font-semibold text-xl ml-2 text-black",
-              font.className,
+              "font-semibold text-xl ml-2 text-black font-mono",
             )}>
-              DrawBoard
+              DrawCode
             </span>
           </Link>
         </Button>

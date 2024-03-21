@@ -482,13 +482,10 @@ export const Canvas = ({
   }, [deleteLayers, history]);
   const me = useSelf();
   const pos = me.presence.cursor;
-  
-
-  
 
   return (
       <main
-      className="h-full w-full relative pattern-dots pattern-neutral-300 pattern-bg-white pattern-size-4 pattern-opacity-30 opacity-100"
+      className="h-full w-full relative bg-white bg-dot-black/[0.2]"
     >
       <Info boardId={boardId} />
       <Participants />
