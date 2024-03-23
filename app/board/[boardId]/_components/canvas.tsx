@@ -1,7 +1,6 @@
 "use client";
-
 import { nanoid } from "nanoid";
-import { useCallback, useMemo, useState, useEffect, ReactElement } from "react";
+import { useCallback, useMemo, useState, useEffect, ReactElement, useRef } from "react";
 import { LiveObject } from "@liveblocks/client";
 
 import { 
@@ -32,7 +31,6 @@ import {
   Side,
   XYWH,
 } from "@/types/canvas";
-import { useDisableScrollBounce } from "@/hooks/use-disable-scroll-bounce";
 import { useDeleteLayers } from "@/hooks/use-delete-layers";
 
 import { Info } from "./info";
@@ -45,6 +43,7 @@ import { SelectionTools } from "./selection-tools";
 import { CursorsPresence } from "./cursors-presence";
 import { Button } from "@/components/ui/button";
 import { Editor } from "./code-editor/editor";
+import { useDisableScrollBounce } from "@/hooks/use-disable-scroll-bounce";
 
 const MAX_LAYERS = 100;
 
@@ -68,7 +67,11 @@ export const Canvas = ({
     b: 0,
   });
 
- 
+  const [showEditor, setShowEditor] = useState<boolean>(true)
+
+  function togggleEditor()  {
+    setShowEditor(showEditor => !showEditor);
+  }
 
   useDisableScrollBounce();
   const history = useHistory();
@@ -311,13 +314,8 @@ export const Canvas = ({
       corner,
     });
   }, [history]);
+  //TODO: fix camera movement
 
-/*   const onWheel = useCallback((e: React.WheelEvent) => {
-    setCamera((camera) => ({
-      x: Math.max(0, Math.min((camera.x - e.deltaX), 2050 - window.innerWidth)),
-      y: Math.max(0, Math.min((camera.y - e.deltaY), 1100 - window.innerHeight)),
-    }));
-  }, []); */
 
   const onPointerMove = useMutation((
     { setMyPresence }, 
@@ -480,14 +478,24 @@ export const Canvas = ({
       document.removeEventListener("keydown", onKeyDown)
     }
   }, [deleteLayers, history]);
-  const me = useSelf();
-  const pos = me.presence.cursor;
+  
+   const CoordinatesInfo = () =>{
+    const me = useSelf();
+    const pos = me.presence.cursor;
+    return (
+      <div className="absolute bottom-2 left-2 flex flex-col gap-y-4">
+        <div className="bg-white rounded-md p-1.5 flex gap-y-1 flex-col items-center shadow-md text-sm font-semibold">
+          {pos ? pos.x : "0"} , {pos ? pos.y : "0"}
+        </div>
+      </div>
+    )
+  }
 
   return (
       <main
-      className="h-full w-full relative bg-white bg-dot-black/[0.2]"
+      className="relative bg-white bg-dot-black/[0.2]"
     >
-      <Info boardId={boardId} />
+      <Info boardId={boardId} toggleEditor={togggleEditor} />
       <Participants />
       <Toolbar
         canvasState={canvasState}
@@ -501,24 +509,17 @@ export const Canvas = ({
         camera={camera}
         setLastUsedColor={setLastUsedColor}
       />
-      <div className="absolute bottom-16 left-2 flex flex-col gap-y-4">
-        <div className="bg-white rounded-md p-1.5 flex gap-y-1 flex-col items-center shadow-md text-sm font-semibold">
-          x:{pos ? pos.x : "0"} , y:{pos ? pos.y : "0"}
-        </div>
-      </div>
-      <div>
-      </div>
+      <CoordinatesInfo />
+      <Editor visible={showEditor} />
       <svg
-        id="main"
-        width={1064}
-        height={1064}
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-full w-full"
-        onPointerMove={onPointerMove}
-        onPointerLeave={onPointerLeave}
-        onPointerDown={onPointerDown}
-        onPointerUp={onPointerUp}
-      >
+            id="main"
+            className="h-[95vh] w-full"
+            xmlns="http://www.w3.org/2000/svg"
+            onPointerMove={onPointerMove}
+            onPointerLeave={onPointerLeave}
+            onPointerDown={onPointerDown}
+            onPointerUp={onPointerUp}
+          >
         <g
           style={{
             transform: `translate(${camera.x}px, ${camera.y}px)`
@@ -527,8 +528,8 @@ export const Canvas = ({
           <rect
           x={63}
           y={63}
-          width={1002}
-          height={1002}
+          width={801}
+          height={801}
           style={{
             fill:"transparent"
           }}
@@ -571,6 +572,5 @@ export const Canvas = ({
         </g>
       </svg>
     </main>
-    
   );
 };

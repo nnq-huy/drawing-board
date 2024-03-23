@@ -11,7 +11,10 @@ const MAX_SHOWN_USERS = 2;
 export const Participants = () => {
   const users = useOthers();
   const currentUser = useSelf();
-  const allUsers = users.slice();
+    const hasMoreUsers = users.length > MAX_SHOWN_USERS;
+ 
+  /* const allUsers = users.slice();
+
   allUsers.push(currentUser);
   let usersMapped: { id: number; name: string ; designation: string; image: string }[]= [];
   allUsers.map((user,index)=>{
@@ -21,13 +24,12 @@ export const Participants = () => {
       designation: "Team member",
       image:user.info?.picture??"./placeholder.jpg"
     })
-  })
+  }) */
   return (
-    <div className="absolute bottom-12 right-[50%] rounded-md p-3 flex items-center z-10">
+    <div className="absolute top-0 right-2 rounded-md p-3 items-center z-10">
       <div className="flex gap-x-2">
-              <AnimatedTooltip items={usersMapped} />
 
-        {/* {users.slice(0, MAX_SHOWN_USERS)
+         {users.slice(0, MAX_SHOWN_USERS)
           .map(({ connectionId, info }) => {
             return (
               <UserAvatar
@@ -53,7 +55,7 @@ export const Participants = () => {
             name={`${users.length - MAX_SHOWN_USERS} more`}
             fallback={`+${users.length - MAX_SHOWN_USERS}`}
           />
-        )} */}
+        )} 
       </div>
     </div>
   );

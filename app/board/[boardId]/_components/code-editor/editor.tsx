@@ -14,8 +14,10 @@ import { EditorToolbar } from "./editor-toolbar";
 import { Language } from "@/types/canvas";
 
 // Collaborative code editor with undo/redo, live cursors, and live avatars
-
-export function Editor() {
+interface EditorProps {
+  visible: boolean
+}
+export const Editor =({visible}:EditorProps) => {
   const room = useRoom();
   const [element, setElement] = useState<HTMLElement>();
   const [yUndoManager, setYUndoManager] = useState<Y.UndoManager>();
@@ -78,15 +80,13 @@ export function Editor() {
     };
   }, [element, language, room, userInfo]);
 
-
-
-  return (
-    <div className={"w-[40vw] h-[95vh] absolute right-2 top-2 rounded-md bg-transparent flex flex-col"}>
+  return visible ? (
+    <div className={"rounded-md bg-transparent min-w-[40vw] h-[95vh] absolute top-2 right-2 flex flex-col"}>
         <div className="flex flex-col">
           {yUndoManager ? <EditorToolbar yUndoManager={yUndoManager} lang={language} action={setLanguage} codeContent={code}/> : null}
         </div>
-      <div className={"bg-white overflow-scroll"} ref={ref}>
+      <div className={"bg-neutral-50 overflow-scroll"} ref={ref}>
       </div>
     </div>
-  );
-}
+  ) : (<></>)
+};

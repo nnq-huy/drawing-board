@@ -15,6 +15,7 @@ import { useRenameModal } from "@/store/use-rename-modal";
 
 interface InfoProps {
   boardId: string;
+  toggleEditor: ()=> void;
 };
 
 const TabSeparator = () => {
@@ -27,6 +28,7 @@ const TabSeparator = () => {
 
 export const Info = ({
   boardId,
+  toggleEditor
 }: InfoProps) => {
   const { onOpen } = useRenameModal();
 
@@ -37,7 +39,7 @@ export const Info = ({
   if (!data) return <InfoSkeleton />;
 
   return (
-    <div className="absolute top-2 left-2 bg-white rounded-md px-1.5 h-12 flex items-center shadow-md">
+    <div className="fixed top-2 left-2 bg-white rounded-md px-1.5 h-12 flex items-center shadow-md max-w-[50vw]">
       <Hint label="Go to boards" side="bottom" sideOffset={10}>
         <Button asChild variant="board" className="px-2">
           <Link href="/">
@@ -48,7 +50,7 @@ export const Info = ({
               width={40}
             />
             <span className={cn(
-              "font-semibold text-xl ml-2 text-black font-mono",
+              "font-semibold text-xl ml-2 text-black font-mono hidden md:flex",
             )}>
               DrawCode
             </span>
@@ -58,11 +60,23 @@ export const Info = ({
       <TabSeparator />
       <Hint label="Edit title" side="bottom" sideOffset={10}>
         <Button
+          size={"sm"}
           variant="board"
-          className="text-base font-normal px-2"
+          className="text-base font-normal px-2 flex-1 truncate"
           onClick={() => onOpen(data._id, data.title)}
         >
           {data.title}
+        </Button>
+      </Hint>
+      <TabSeparator />
+      <Hint label="Toggle code editor" side="bottom" sideOffset={10}>
+        <Button
+          size={"sm"}
+          variant="board"
+          className="text-base font-normal px-2 flex-1 truncate"
+          onClick={toggleEditor}
+        >
+          Editor
         </Button>
       </Hint>
       <TabSeparator />
